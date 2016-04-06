@@ -522,11 +522,12 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-// CINU: Tutaj jest problem Forced reflow - wymaga przeliczen layoutu (507 i 508) - chodzi o scrollTop, powinno być poza pentlą
+// CINU: Forced reflow elimminated by pulling scrollTop outside the loop (by var scroll)
   var items = document.querySelectorAll('.mover');
+  var scroll = document.body.scrollTop / 1250
 
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
+    var phase = Math.sin(scroll + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 
