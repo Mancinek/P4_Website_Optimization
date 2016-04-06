@@ -33,6 +33,7 @@ form {
   position: fixed;
   width: 256px;
   z-index: -1;
+  will-change: transform; /* added this in order to place moving pizzas on separate layers and avoid continous painting */
 }
 
 .randomPizzaContainer {
