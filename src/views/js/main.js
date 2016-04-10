@@ -533,7 +533,7 @@ function updatePositions() {
 // the same collection of element on every scroll
   var scroll = document.body.scrollTop / 1250;
 
-  // MARCIN_BEDNARZ: An array for phase variable (now we have less calculation to do)
+  // MARCIN_BEDNARZ: An array filled with sines of scrolls (now we have less calculation to do)
   var phaseTab = [];
 
   for (var a = 0; a < 5; a++){
@@ -542,7 +542,7 @@ function updatePositions() {
 
   for (var i = 0; i < items.length; i++) {
     var phase = phaseTab[i%5];
-    items[i].style.transform = 'translateX(' + (100*phase) + 'px)'; //items[i].style.left and basicLeft replaced by translateX
+    items[i].style.transform = 'translateX(' + (100*phase) + 'px)'; // MARCIN_BEDNARZ: items[i].style.left and basicLeft replaced by translateX
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
