@@ -1,6 +1,6 @@
 #Website Optimization
 
-This is a repository that contains two webpages index.html and views/pizza.html optimized to work fast and silky smooth. You will find here source (src folder) and distribution (dist folder) version of the project.
+This is a repository that contains two webpages `index.html` and `views/pizza.html` optimized to work fast and silky smooth. You will find here source (`src` folder) and distribution (`dist` folder) version of the project.
 
 ##Contents
 
