@@ -421,8 +421,10 @@ var resizePizzas = function(size) {
 
   changeSliderLabel(size);
 
-   // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
-  function determineDx (elem, size) {
+// MARCIN_BEDNARZ: Below function determineDX is useless because of ineffective method of determining new pizza size, the necessary code has been
+// moved to function changePizzaSizes.
+
+  /*function determineDx (elem, size) {
     var oldWidth = elem.offsetWidth;
     var windowWidth = document.querySelector("#randomPizzas").offsetWidth;
     var oldSize = oldWidth / windowWidth;
@@ -446,14 +448,36 @@ var resizePizzas = function(size) {
     var dx = (newSize - oldSize) * windowWidth;
 
     return dx;
-  }
+  } */
 
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
-    for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
-      var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
-      var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-      document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
+
+    // MARCIN_BEDNARZ: This below switch was been moved from determineDx() and newWidth variable has been set, which holds the new sizes in percentage
+    var newWidth = 0;
+
+    switch(size) {
+        case "1":
+          newWidth = 25;
+          break;
+        case "2":
+          newWidth = 33.3;
+          break;
+        case "3":
+          newWidth = 50;
+          break;
+        default:
+          console.log("bug in sizeSwitcher");
+      }
+
+    // MARCIN_BEDNARZ: Changed querySelectorAll to faster getElementsByClassName
+    var randomPizzas = document.getElementsByClassName("randomPizzaContainer");
+
+    for (var i = 0; i < randomPizzas.length; i++) {
+      randomPizzas[i].style.width = newWidth + "%"; // MARCIN_BEDNARZ: newWidth is now set by the switch(size) in easier and more effective way
+      //var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
+      //var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
+      //document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
     }
   }
 
@@ -500,12 +524,25 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // Moves the sliding background pizzas based on scroll position
 function updatePositions() {
   frame++;
+
   window.performance.mark("mark_start_frame");
 
-  var items = document.querySelectorAll('.mover');
+// MARCIN_BEDNARZ: Forced reflow elimminated by pulling scrollTop outside the loop (by var scroll)
+// MARCIN_BEDNARZ: Changed querySelectorAll to faster getElementsByClassName
+// MARCIN_BEDNARZ: var items = document.getElementsByClassName('mover') -> moved to the end of script to the last function, in order to not getting
+// the same collection of element on every scroll
+  var scroll = document.body.scrollTop / 1250;
+
+  // MARCIN_BEDNARZ: An array for phase variable (now we have less calculation to do)
+  var phaseTab = [];
+
+  for (var a = 0; a < 5; a++){
+    phaseTab[a] = Math.sin(scroll + (a % 5));
+  }
+
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+    var phase = phaseTab[i%5];
+    items[i].style.transform = 'translateX(' + (100*phase) + 'px)'; //items[i].style.left and basicLeft replaced by translateX
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -523,17 +560,30 @@ window.addEventListener('scroll', updatePositions);
 
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
+
   var cols = 8;
   var s = 256;
-  for (var i = 0; i < 200; i++) {
+
+  // MARCIN_BEDNARZ: Changed max number of pizzas to dependant on screen size
+  var windowHeight = Math.floor(window.innerHeight);
+  var rows = Math.floor(windowHeight/s)+1; // MARCIN_BEDNARZ: Height of window divided on spaces between pizzas plus 1 full row
+  var numberOfPizzas = Math.floor(cols*rows);
+
+  for (var i = 0; i < numberOfPizzas; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
-    elem.basicLeft = (i % cols) * s;
+    //elem.basicLeft = (i % cols) * s; MARCIN_BEDNARZ:this part has been replaced by below elem.style.left
+    elem.style.left = ((i % cols) * s) + 'px';
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
-    document.querySelector("#movingPizzas1").appendChild(elem);
+    document.getElementById("movingPizzas1").appendChild(elem);
+
   }
+  window.items=document.getElementsByClassName("mover");  // MARCIN_BEDNARZ: moved here from updatePosition() in order to
+                                                          // not getting the same collection of elements on every scroll
   updatePositions();
+
 });
+
