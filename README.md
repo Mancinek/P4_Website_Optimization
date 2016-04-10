@@ -16,22 +16,22 @@ This is a repository that contains two webpages `index.html` and `views/pizza.ht
 
 First [download](https://github.com/Mancinek/P4_Website_Optimization/archive/master.zip) the repository.
 
-To run firts web page (Cam's Portfolio) open the `dist/index.html` file in your browser. To test speed you can use ngrok to virtualize your localhost and test it with PageSpeed. You can also run this [page](http://mancinek.github.io/) - it is version of this page hosted on github. You can test it directly on [PageSpeed](https://developers.google.com/speed/pagespeed/insights/?url=mancinek.github.io).
+To run firts webpage (Cam's Portfolio) open the `dist/index.html` file in your browser. To test speed you can use `ngrok` to virtualize your localhost and test it with PageSpeed. You can also run this [page](http://mancinek.github.io/) - it is version of this page hosted on github. You can test it directly on [PageSpeed](https://developers.google.com/speed/pagespeed/insights/?url=mancinek.github.io).
 
-To run second web page (Cam's Pizzeria) run `dist/views/pizza.html` in your browser and then test it with Chrome Developer Tools.
+To run second webpage (Cam's Pizzeria) run `dist/views/pizza.html` in your browser and then test it with Chrome Developer Tools.
 
 ##2. Optimizations
 
-I've made several optimizations in both files to reach the set goals.
+I've made several optimizations in both projects to reach the set goals.
 
 ###Critical Rendering Path
 
-*Goal: index.html achieves a PageSpeed score of at least 90 for Mobile and Desktop.*
+*Goal: `index.html` achieves a PageSpeed score of at least 90 for Mobile and Desktop.*
 
 Summary of changes I've made:
 - inline `style.css` and added `@font-face` in this style
 - created `css/print.min.css` and used `media="print"` in HTML
-- inline scripts and placed at the end of the body with `async` attribute
+- inline scripts and placed them at the end of the body with `async` attribute
 - compressed images
 
 
@@ -40,7 +40,7 @@ Summary of changes I've made:
 *Goal: Optimizations made to `views/js/main.js` make `views/pizza.html` render with a consistent frame-rate at 60fps when scrolling.*
 
 Summary of changes I've made:
-- changes in updatePositions() function:
+- changes in `updatePositions()` function:
 	- pulling `scrollTop` outside the loop (`scroll` variable)
 	- created array `phaseTab` filled with sines of scroll's
 	- refactored for-loop with use of `phaseTab` array
