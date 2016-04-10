@@ -26,7 +26,7 @@ I've made several optimizations in both files to reach the set goals.
 
 ###Critical Rendering Path
 
-`Goal: index.html achieves a PageSpeed score of at least 90 for Mobile and Desktop.`
+*Goal: index.html achieves a PageSpeed score of at least 90 for Mobile and Desktop.*
 
 Summary of changes I've made:
 - inline `style.css` and added `@font-face` in this style
@@ -37,7 +37,7 @@ Summary of changes I've made:
 
 ###Frame Rate
 
-`Goal: Optimizations made to `views/js/main.js` make `views/pizza.html` render with a consistent frame-rate at 60fps when scrolling.`
+*Goal: Optimizations made to `views/js/main.js` make `views/pizza.html` render with a consistent frame-rate at 60fps when scrolling.*
 
 Summary of changes I've made:
 - changes in updatePositions() function:
@@ -48,13 +48,13 @@ Summary of changes I've made:
 	- selector of items `window.items=document.getElementsByClassName("mover")` placed in last anonymous function at the end of file. The method of selecting items has been also changed from `querySelectorAll` to faster `getElementsByClassName`
 - changed max number of pizzas in last function to dependant on screen size
 - replaced `elem.basicLeft` in last function with `elem.style.left`
-- used `will-change` and `backface-visiblity` for `.mover` in CSS
-- used hacks `translate3d(0,0,0)` and `translateZ(0)` for `.mover` in CSS
+- used `will-change` and `backface-visiblity` for `.mover` in `style.css`
+- used hacks `translate3d(0,0,0)` and `translateZ(0)` for `.mover` in `style.css`
 - compressed `pizza.png`
 
 ###Computational Efficiency
 
-`Goal: Time to resize pizzas is less than 5 ms using the pizza size slider on the `views/pizza.html` page. Resize time is shown in the browser developer tools.`
+*Goal: Time to resize pizzas is less than 5 ms using the pizza size slider on the `views/pizza.html` page. Resize time is shown in the browser developer tools.*
 
 Summary of changes I've made:
 - deleted ineffective `determineDX()` function
