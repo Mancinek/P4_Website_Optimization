@@ -1,50 +1,52 @@
-#Website_Optimization
+#Website Optimization
 
-This is a recreation of classic arcade game **Frogger**. It is simplified version with easy rules. At this stage,
-this game has no end, you can collect points endlessly. This repository gives you basis to further development of game.
+This is a repository that contains two webpages index.html and views/pizza.html optimized to work fast and silky smooth. You will find here source (src folder) and distribution (dist folder) version of the project.
 
 ##Contents
 
 1. How to run
-2. How to play
-3. Issues
-4. How the code is organized
-5. Links
+2. Optimizations:
+	- Critical Rendering Path
+	- Frame Rate
+	- Computational Efficiency
+3. Regrets
+4. Links
 
 ##How to run
 
-To run this game [download](https://github.com/Mancinek/frontend-nanodegree-arcade-game/archive/master.zip) the repository and open the `index.html` file in your browser - the game will start immediately.
 
-##How to play
+To run this game [download](https://github.com/Mancinek/P4_Website_Optimization/archive/master.zip) the repository and open the `index.html` file in your browser - the game will start immediately.
 
-You are the character
+OR http://mancinek.github.io/
 
-### How to move the player
+##Optimizations
 
-Use _arrows_ o
+###Critical Rendering Path
 
-### Rules
+Goal: index.html achieves a PageSpeed score of at least 90 for Mobile and Desktop.
 
-You hav
 
-##Issues
+###Frame Rate
 
-There is one
+Goal: Optimizations made to views/js/main.js make views/pizza.html render with a consistent frame-rate at 60fps when scrolling.
 
-##How the code is organized
+###Computational Efficiency
 
-The game runs on basis of three _js_ files:
+Goal: Time to resize pizzas is less than 5 ms using the pizza size slider on the views/pizza.html page. Resize time is shown in the browser developer tools.
 
-* `engine.js` draws the canvas on the screen and provides the game loop functionality by calling update and render methods on player and enemies instances (defined in app.js)
-* `resources.js` is an image loading utility and caching layer
-* `app.js` implements _Player_, _Enemy_ and _Gem_ classes. It creates also _Settings_ class to adjust game difficulty.
 
-The repository contains also other helper files like:
+##Regrets
 
-* images of characters, water, grass, stones,
-* `index.html` that loads the scripts on the page,
-* `style.css` that defines the style of html (centers the canvas and score).
+I regret I used no build tools (such as Gulp/Grunt) to automatize process of building distribution version of this webpages. It has been done manually with help of compression tools listed in next paragraph (Links).
 
 ##Links
 
-The basic engine of the game is forked from Udacity repository [here](https://github.com/udacity/frontend-nanodegree-arcade-game).
+The repository can be download[here](https://github.com/Mancinek/P4_Website_Optimization).
+Index.html - http://mancinek.github.io/
+to test https://developers.google.com/speed/pagespeed/insights/?url=mancinek.github.io
+
+Compression and minify tools:
+https://cssminifier.com/
+http://jscompress.com/
+http://www.willpeavy.com/minifier/
+http://compresspng.com/
