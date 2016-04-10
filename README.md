@@ -14,25 +14,34 @@ This is a repository that contains two webpages index.html and views/pizza.html 
 
 ##How to run
 
+First [download](https://github.com/Mancinek/P4_Website_Optimization/archive/master.zip) the repository.
 
-To run this game [download](https://github.com/Mancinek/P4_Website_Optimization/archive/master.zip) the repository and open the `index.html` file in your browser - the game will start immediately.
+To run firts web page (Cam's Portfolio) open the `dist/index.html` file in your browser. To test speed you can use ngrok to virtualize your localhost and test it with PageSpeed. You can also run this [page](http://mancinek.github.io/) - it is version of this page hosted on github. You can test it directly on [PageSpeed](https://developers.google.com/speed/pagespeed/insights/?url=mancinek.github.io).
 
-OR http://mancinek.github.io/
+To run second web page (Cam's Pizzeria) run dist/views/pizza.html in your browser and then test it with Chrome Developer Tools.
 
 ##Optimizations
 
+I've made several optimizations in both files to reach the set goals.
+
 ###Critical Rendering Path
 
-Goal: index.html achieves a PageSpeed score of at least 90 for Mobile and Desktop.
+*Goal: index.html achieves a PageSpeed score of at least 90 for Mobile and Desktop.*
+
+Summary of changes I've made:
+- placed the style.css "inline" and added @font-face in this style
+- created css/print.min.css and used media="print" in HTML
+- scripts placed at the end of body with async attribute
+- compressed images
 
 
 ###Frame Rate
 
-Goal: Optimizations made to views/js/main.js make views/pizza.html render with a consistent frame-rate at 60fps when scrolling.
+*Goal: Optimizations made to views/js/main.js make views/pizza.html render with a consistent frame-rate at 60fps when scrolling.*
 
 ###Computational Efficiency
 
-Goal: Time to resize pizzas is less than 5 ms using the pizza size slider on the views/pizza.html page. Resize time is shown in the browser developer tools.
+*Goal: Time to resize pizzas is less than 5 ms using the pizza size slider on the views/pizza.html page. Resize time is shown in the browser developer tools.*
 
 
 ##Regrets
@@ -46,7 +55,7 @@ Index.html - http://mancinek.github.io/
 to test https://developers.google.com/speed/pagespeed/insights/?url=mancinek.github.io
 
 Compression and minify tools:
-https://cssminifier.com/
-http://jscompress.com/
-http://www.willpeavy.com/minifier/
-http://compresspng.com/
+- https://cssminifier.com/
+- http://jscompress.com/
+- http://www.willpeavy.com/minifier/
+- http://compresspng.com/
